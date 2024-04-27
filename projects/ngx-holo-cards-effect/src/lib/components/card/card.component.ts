@@ -44,7 +44,7 @@ interface CardStyle {
 }
 
 @Component({
-  selector: 'lib-card',
+  selector: 'ngx-holo-card',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './card.component.html',

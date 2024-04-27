@@ -1,5 +1,11 @@
 {
   "name": "ngx-holo-cards-effect",
+  "description": "Angular library for displaying cards with a holographic effect",
+  "author": {
+    "name": "Rubens Pischedda",
+    "email": "rubens.pischedda@outlook.it"
+  },
+  "license": "GPL-3.0",
   "version": "0.0.1",
   "peerDependencies": {
     "@angular/common": "^17.3.0",

@@ -1,0 +1,4 @@
+<app-select [options]="getCardsOptions()" [(value)]="selectedCard"></app-select>
+<div class="flex w-full justify-center my-4">
+    <app-button (clicked)="importClick.emit()">Import JSON</app-button>
+</div>

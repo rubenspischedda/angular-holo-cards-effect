@@ -1,0 +1,12 @@
+{
+  "bumpFiles": [
+    {
+      "filename": "package.json",
+      "type": "json"
+    },
+    {
+      "filename": "projects/ngx-holo-cards-effect/package.json",
+      "type": "json"
+    }
+  ]
+}

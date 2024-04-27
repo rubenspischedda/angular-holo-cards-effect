@@ -1,0 +1,9 @@
+<label>
+    @if (label()) {
+        <app-label>{{ label() }}</app-label>
+    }
+    <app-select [(value)]="url" [options]="selectOptions()"></app-select>
+    <app-text-input [(value)]="url"></app-text-input>
+
+    <input type="file" (change)="onFileChange($event)" class="bg-slate-700 rounded-md w-full px-2 py-1 text-xs" />
+</label>

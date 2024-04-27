@@ -1,0 +1,32 @@
+<div class="border border-gray-400 rounded-lg px-4 py-4 flex flex-col relative" [ngClass]="{
+    'gap-y-1': space() === GroupSpace.Small,
+    'gap-y-2': space() === GroupSpace.Medium,
+    'gap-y-4': space() === GroupSpace.Large,
+    'gap-y-8': space() === GroupSpace.ExtraLarge,
+}">
+    <div class="text-gray-500 text-xs font-medium uppercase absolute left-4 bg-gray-900 px-2 flex justify-between cursor-pointer transition-all duration-300"
+        (click)="toggleExpanded()"
+        [ngClass]="{
+            'top-2': expanded() === false,
+            '-top-2': expanded() === true,
+
+            'w-[calc(100%_-_1.5rem)]': expanded() === false,
+        }">
+        <div>{{ label() }}</div>
+
+        @if (!expanded()) {
+            <div class="cursor-pointer">⯆</div>
+        }
+    </div>
+
+    @if (expanded()) {
+        <ng-content></ng-content>
+    }
+
+    @if (expanded()) {
+        <div class="flex items-center justify-center cursor-pointer w-full"
+              (click)="toggleExpanded()">
+            <div class="text-xs uppercase font-medium select-none">⯅ Collapse ⯅</div>
+        </div>
+    }
+</div>

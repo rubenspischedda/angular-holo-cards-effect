@@ -1,0 +1,268 @@
+/*
+
+  BASE STYLES / VARIABLES
+*/
+
+
+
+
+
+
+
+/*
+
+  SHINE LAYERS
+
+*/
+
+
+:root {
+
+    --card-edge: hsl(47, 100%, 78%);
+    --card-back: hsl(205, 100%, 25%);
+    --card-glow: hsl(175, 100%, 90%);
+
+    --sunpillar-1: hsl(2, 100%, 73%);
+    --sunpillar-2: hsl(53, 100%, 69%);
+    --sunpillar-3: hsl(93, 100%, 69%);
+    --sunpillar-4: hsl(176, 100%, 76%);
+    --sunpillar-5: hsl(228, 100%, 74%);
+    --sunpillar-6: hsl(283, 100%, 73%);
+
+    --sunpillar-clr-1: var(--sunpillar-1);
+    --sunpillar-clr-2: var(--sunpillar-2);
+    --sunpillar-clr-3: var(--sunpillar-3);
+    --sunpillar-clr-4: var(--sunpillar-4);
+    --sunpillar-clr-5: var(--sunpillar-5);
+    --sunpillar-clr-6: var(--sunpillar-6);
+
+}
+
+.card {
+
+    /* place the card on a new transform layer and
+    make sure it has hardward acceleration... we gun'need that! */
+    -webkit-transform: translate3d(0px, 0px, 0.01px);
+    transform: translate3d(0px, 0px, 0.01px);
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    pointer-events: none;
+
+    /* make sure the card is above others if it's scaled up */
+    z-index: calc(var(--card-scale) * 2);
+
+    /* every little helps! */
+    will-change: transform, visibility, z-index;
+
+}
+
+.card,
+.card * {
+    /* outline is a little trick to anti-alias */
+    outline: 1px solid transparent;
+}
+
+.card,
+.card_rotator {
+    aspect-ratio: var(--card-aspect);
+    border-radius: var(--card-radius);
+}
+
+.card.active .card_translater,
+.card.active .card_rotator {
+    /* prevent pinch/double-tap zooms on card */
+    touch-action: none;
+}
+
+.card_translater,
+.card_rotator {
+    display: grid;
+    perspective: 600px;
+    will-change: transform, box-shadow;
+
+    transform-origin: center;
+    -webkit-transform-origin: center;
+}
+
+.card_translater {
+    width: auto;
+    position: relative;
+
+    -webkit-transform: translate3d(var(--translate-x), var(--translate-y), 0.1px) scale(var(--card-scale));
+    transform: translate3d(var(--translate-x), var(--translate-y), 0.1px) scale(var(--card-scale));
+}
+
+.card_rotator {
+    -webkit-transform: rotateY(var(--rotate-x)) rotateX(var(--rotate-y));
+    -webkit-transform-style: preserve-3d;
+    transform: rotateY(var(--rotate-x)) rotateX(var(--rotate-y));
+    transform-style: preserve-3d;
+
+    /* performance */
+    pointer-events: auto;
+    /* overflow: hidden; <-- this improves perf on mobile, but breaks backface visibility. */
+    /* isolation: isolate; <-- this improves perf, but breaks backface visibility on Chrome. */
+}
+
+.card_rotator,
+.card.active .card_rotator:focus {
+    transition: box-shadow 0.4s ease, opacity .33s ease-out;
+    box-shadow:
+        0 0 3px -1px transparent,
+        0 0 2px 1px transparent,
+        0 0 5px 0px transparent,
+        0px 10px 20px -5px black,
+        0 2px 15px -5px black,
+        0 0 20px 0px transparent;
+}
+
+.card_rotator * {
+    width: 100%;
+    display: grid;
+    grid-area: 1/1;
+    aspect-ratio: var(--card-aspect);
+    border-radius: var(--card-radius);
+    image-rendering: optimizeQuality;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.card_rotator img {
+    height: auto;
+    -webkit-transform: translate3d(0px, 0px, 0.01px);
+    transform: translate3d(0px, 0px, 0.01px);
+}
+
+.card_back {
+    background-color: var(--card-back);
+    -webkit-transform: rotateY(180deg) translateZ(1px);
+    transform: rotateY(180deg) translateZ(1px);
+    backface-visibility: visible;
+}
+
+.card_front,
+.card_front * {
+    backface-visibility: hidden;
+}
+
+.card_front {
+    opacity: 1;
+    transition: opacity 0.33s ease-out;
+    -webkit-transform: translate3d(0px, 0px, 0.01px);
+    transform: translate3d(0px, 0px, 0.01px);
+}
+
+
+/**
+    
+  Shine & Glare Effects
+  
+  **/
+
+.card_shine {
+
+    display: grid;
+    transform: translateZ(1px);
+    overflow: hidden;
+    z-index: 3;
+
+    background: transparent;
+    background-size: cover;
+    background-position: center;
+
+    filter: brightness(.85) contrast(2.75) saturate(.65);
+    mix-blend-mode: color-dodge;
+
+    opacity: 1;
+
+}
+
+.card_shine:before,
+.card_shine:after {
+
+    --sunpillar-clr-1: var(--sunpillar-5);
+    --sunpillar-clr-2: var(--sunpillar-6);
+    --sunpillar-clr-3: var(--sunpillar-1);
+    --sunpillar-clr-4: var(--sunpillar-2);
+    --sunpillar-clr-5: var(--sunpillar-3);
+    --sunpillar-clr-6: var(--sunpillar-4);
+
+    grid-area: 1/1;
+    transform: translateZ(1px);
+    border-radius: var(--card-radius);
+
+}
+
+.card_shine:after {
+
+    --sunpillar-clr-1: var(--sunpillar-6);
+    --sunpillar-clr-2: var(--sunpillar-1);
+    --sunpillar-clr-3: var(--sunpillar-2);
+    --sunpillar-clr-4: var(--sunpillar-3);
+    --sunpillar-clr-5: var(--sunpillar-4);
+    --sunpillar-clr-6: var(--sunpillar-5);
+
+    transform: translateZ(1.2px);
+
+}
+
+.card_glare {
+
+    /* make sure the glare doesn't clip */
+    transform: translateZ(1.41px);
+    overflow: hidden;
+
+    background-image: radial-gradient(farthest-corner circle at var(--pointer-x) var(--pointer-y),
+            hsla(0, 0%, 100%, 0.8) 10%,
+            hsla(0, 0%, 100%, 0.65) 20%,
+            hsla(0, 0%, 0%, 0.5) 90%);
+
+    opacity: var(--card-opacity);
+    mix-blend-mode: overlay;
+
+}
+
+
+
+
+
+
+/**
+  
+    Masking Effects
+  
+  **/
+
+.card.masked .card_shine,
+.card.masked .card_shine:before,
+.card.masked .card_shine:after {
+
+    /** masking image for cards which are masked **/
+    -webkit-mask-image: var(--mask);
+    mask-image: var(--mask);
+    -webkit-mask-size: cover;
+    mask-size: cover;
+    -webkit-mask-position: center center;
+    mask-position: center center;
+
+}
+
+.card[data-rarity="rare holo"] .card_glare:after,
+.card[data-rarity="rare holo cosmos"] .card_glare:after,
+.card[data-rarity$="reverse holo"] .card_glare:after {
+    clip-path: var(--clip);
+}
+
+.card[data-rarity="rare holo"][data-subtypes^="stage"] .card_glare:after,
+.card[data-rarity="rare holo cosmos"][data-subtypes^="stage"] .card_glare:after,
+.card[data-rarity$="reverse holo"][data-subtypes^="stage"] .card_glare:after {
+    clip-path: var(--clip-stage);
+}
+
+.card[data-rarity="rare holo"][data-supertype="trainer"] .card_glare:after,
+.card[data-rarity="rare holo cosmos"][data-supertype="trainer"] .card_glare:after,
+.card[data-rarity$="reverse holo"][data-supertype="trainer"] .card_glare:after {
+    clip-path: var(--clip-trainer);
+}

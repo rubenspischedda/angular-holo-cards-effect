@@ -1,0 +1,6 @@
+<select class="bg-slate-700 rounded-md w-full px-2 py-1 text-xs"
+    [(ngModel)]="value">
+    @for (option of options(); track $index) {
+        <option [ngValue]="option.value">{{ option.label }}</option>
+    }
+</select>

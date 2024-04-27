@@ -40,3 +40,9 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+/**/*/node_modules
+.vscode
+.nx
+
+src/app/cards.json

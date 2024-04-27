@@ -1,0 +1,19 @@
+::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 1rem;
+    height: 1rem;
+    background: rgb(16 185 129);
+    cursor: pointer;
+    border-radius: 100%;
+}
+
+::-moz-range-track {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 1rem;
+    height: 1rem;
+    background: rgb(16 185 129);
+    cursor: pointer;
+    border-radius: 100%;
+}

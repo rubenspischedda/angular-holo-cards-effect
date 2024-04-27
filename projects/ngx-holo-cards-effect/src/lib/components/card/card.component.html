@@ -1,0 +1,50 @@
+<div (mouseenter)="onMouseEnterCard($event)"
+     (mousemove)="onMouseMoveInCard($event)"
+     (mouseleave)="onMouseLeaveCard()">
+
+  @if (showCard()) {
+    <div 
+        class="card"
+        style="display: block; height: auto; position: relative; transform-origin: center;"
+        [ngClass]="{
+          'masked': showMask()
+        }"
+        [ngStyle]="cardStyle()"
+        [attr.data-rarity]="getRaritiesAttribute()">
+
+      <div class="card_translater">
+        <div #cardContainer class="card_rotator"
+            style="border-radius: var(--card-radius);">
+
+            @if (backImage() !== null && backImage() !== undefined && backImage() !== '') {
+              <img [src]="backImage()"
+                  style="position: absolute; width: 100%; top: 0; left: 0; transform: scaleX(-1);"
+                  [ngStyle]="{
+                    opacity: showBack() ? 1 : 0,
+                  }" />
+            }
+
+          <div class="card_front">
+
+            @if (frontImage() !== null && frontImage() !== undefined && frontImage() !== '') {
+              <img #frontImageElement
+                  [src]="frontImage()"
+                  style="position: absolute; width: 100%; top: 0; left: 0;"
+                  [ngStyle]="{
+                    opacity: (showFront() && facingFront()) ? 1 : 0,
+                  }" />
+            }
+
+            @if (showFoil()) {
+              <div class="card_shine"
+                  style="position: absolute; top: 0; left: 0;"></div>
+              <div class="card_glare"
+                  style="position: absolute; top: 0; left: 0;"></div>
+            }
+
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+</div>

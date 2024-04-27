@@ -1,0 +1,32 @@
+<label>
+    @if (label()) {
+        <div class="flex items-center">
+            <app-label>{{ label() }}</app-label> @if (showValue()) { <span class="text-xs text-gray-300">: {{ value() | number: '1.01' }}</span> }
+        </div>
+    }
+
+    @if (!label() && showValue()) {
+        <span class="text-xs text-gray-300">{{ value() }}</span>
+    }
+
+    <div>
+        <input type="range"
+               [(ngModel)]="value"
+               class="appearance-none rounded-md h-2 w-full bg-emerald-900"
+               [min]="min()"
+               [max]="max()"
+               [step]="step()" />
+        @if (showMinMax()) {
+            <div class="flex justify-between text-xs text-gray-300">
+                <span>{{ min() }}</span>
+                <span>{{ max() }}</span>
+            </div>
+        }
+    </div>
+
+</label>
+@if (showReset()) {
+    <div class="w-full flex justify-center">
+        <app-button (click)="reset()">Reset</app-button>
+    </div>
+}
